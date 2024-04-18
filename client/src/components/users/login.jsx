@@ -18,9 +18,9 @@ const Login = () => {
       sessionStorage.setItem('token', data.login.token);
       sessionStorage.setItem('isLoggedIn', true);
       sessionStorage.setItem("user", JSON.stringify(data.login.user));
-     
+      const userName = data.login.user.username 
       message.success(
-      `Hey, ${data.login.user.username}! Successfully Logged In`
+      `Hey, ${userName.charAt(0).toUpperCase() + userName.slice(1)}!`
       );
       navigate("/");
     } catch (error) {

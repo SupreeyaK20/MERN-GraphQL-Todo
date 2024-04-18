@@ -1,0 +1,15 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.menu {
+  flex: 1;
+  min-width: 0;
+}
+
+.avatar {
+  cursor: pointer;
+  margin-top: 1rem;
+}
