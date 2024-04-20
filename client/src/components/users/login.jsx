@@ -82,7 +82,7 @@ const Login = () => {
               span: 16,
             }}
           >
-            <Checkbox>Remember me</Checkbox>
+            <Checkbox>Remember Me</Checkbox>
           </Form.Item>
 
           <Form.Item
