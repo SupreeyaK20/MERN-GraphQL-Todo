@@ -4,7 +4,7 @@ import { LogoutOutlined, SettingOutlined } from "@ant-design/icons";
 import "./layout.css";
 import { useNavigate } from "react-router-dom";
 import { headerMenuItems } from "../../utils/constant";
-import { getRandomColor } from "../../helpers/helper";
+import { clearCookies, getRandomColor } from "../../helpers/helper";
 const { Header } = Layout;
 
 const HeaderLayout = () => {
@@ -16,6 +16,7 @@ const HeaderLayout = () => {
 
   const handleLogout = () => {
     sessionStorage.clear();
+    clearCookies('remeber_me')
     navigate("/login");
   };
 

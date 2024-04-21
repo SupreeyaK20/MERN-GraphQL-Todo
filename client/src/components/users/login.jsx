@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Card, Checkbox, Form, Input, message, Typography } from "antd";
 import { gql, useMutation } from "@apollo/client";
 import { LOGIN } from "../../api/mutations/userMutation";
 import { useNavigate } from "react-router-dom";
+import { setCookies } from "../../helpers/helper";
 
 const { Title } = Typography;
 
 const Login = () => {
   const navigate = useNavigate();
   const [loginUser] = useMutation(LOGIN);
+  const [rememberMe, setRememberMe] = useState(false)
 
   const onFinish = async (values) => {
     try {
@@ -18,10 +20,16 @@ const Login = () => {
       sessionStorage.setItem('token', data.login.token);
       sessionStorage.setItem('isLoggedIn', true);
       sessionStorage.setItem("user", JSON.stringify(data.login.user));
+
+      if (rememberMe) {
+        setCookies('remeber_me', data.login.token, 30)
+      }
+
       const userName = data.login.user.username 
       message.success(
       `Hey, ${userName.charAt(0).toUpperCase() + userName.slice(1)}!`
       );
+      
       navigate("/");
     } catch (error) {
       message.error(error.message);
@@ -43,7 +51,7 @@ const Login = () => {
             maxWidth: 600,
           }}
           initialValues={{
-            remember: true,
+            remember: rememberMe,
           }}
           onFinish={onFinish}
           autoComplete="off"
@@ -82,7 +90,7 @@ const Login = () => {
               span: 16,
             }}
           >
-            <Checkbox>Remember Me</Checkbox>
+            <Checkbox onChange={(e) => setRememberMe(e.target.checked)}>Remember Me</Checkbox>
           </Form.Item>
 
           <Form.Item
