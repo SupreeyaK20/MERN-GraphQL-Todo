@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Card, Flex, Space, Table } from 'antd';
+import OpenModal from './modal';
 const data = [
   {
     key: '1',
@@ -29,6 +30,9 @@ const data = [
 const Home = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
+  const [modalOpen, setModalOpen] = useState(false);
+
+
   const handleChange = (pagination, filters, sorter) => {
     console.log('Various parameters', pagination, filters, sorter);
     setFilteredInfo(filters);
@@ -100,11 +104,54 @@ const Home = () => {
     },
   ];
   return (
-    <Card  className="card" style={{ width: "93%", margin: "3rem", display: "flex", flexDirection: "column"}}>
-      <Button type="primary" style={{ alignSelf: "flex-end", width: "fit-content" }}>Add Todo</Button>
-
-      <Table columns={columns} dataSource={data} onChange={handleChange} className='mt5'/>
+    <>
+    <Card
+      className="card"
+      style={{
+        width: "93%",
+        margin: "3rem",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <div
+        style={{ display: "flex", justifyContent: "end", alignItems: "center" }}
+      >
+        <Button type="primary" onClick={() => setModalOpen(true)}>Add Todo</Button>
+      </div>
+      <br />
+      <Table
+        columns={columns}
+        dataSource={data}
+        onChange={handleChange}
+        className="mt5"
+      />
     </Card>
+    <Card
+      className="card"
+      style={{
+        width: "93%",
+        margin: "3rem",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <div
+        style={{ display: "flex", justifyContent: "end", alignItems: "center" }}
+      >
+        <Button type="primary" onClick={() => setModalOpen(true)}>Add Todo</Button>
+      </div>
+      <br />
+      <Table
+        columns={columns}
+        dataSource={data}
+        onChange={handleChange}
+        className="mt5"
+      />
+    </Card>
+    <OpenModal modalOpen={modalOpen} setModalOpen={setModalOpen}/>
+    </>
+
   );
 };
 export default Home;

@@ -7,14 +7,17 @@ const typeDefs = gql`
         email: String!,
         password: String!,
         role: String!,
-        token: String
+        token: String,
+        todos: [Todo!]!
     }
 
     type Todo {
         id: ID!
         title: String!
-        completed: Boolean
-        userid: [User]
+        description: String
+        isCompleted: Boolean
+        userid: ID!
+        user: User
     }
 
     type AuthPayload {
@@ -23,15 +26,16 @@ const typeDefs = gql`
     }     
 
     type Query {
+        getTodos: [Todo!]!
         allUsers: [User!]!
-        allTodos: [Todo!]!
+        getUsersTodo: [Todo!]!
     }
 
     type Mutation {
         register(email: String!, password: String!): User!
         login(email: String!, password: String!): AuthPayload!
 
-        createTodo(title: String!, completed: Boolean!): Todo!
+        createTodo(title: String!, description: String, isCompleted: Boolean!): Todo!
     }
 `;
 
