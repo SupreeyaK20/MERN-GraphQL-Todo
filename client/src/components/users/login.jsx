@@ -79,7 +79,7 @@ const Login = () => {
               },
             ]}
           >
-            <Input.Password />
+            <Input.Password autoComplete="off"/>
           </Form.Item>
 
           <Form.Item

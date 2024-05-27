@@ -3,7 +3,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 const Login = lazy(() => import("./components/users/login"));
 import Home from "./components/shared/home";
 import Layout from "./components/layout/layout";
-import Loader from "./components/common/loader";
+import Loader from "./components/shared/loader";
+import Todo from "./components/todo";
 
 function App() {
   const isLoggedIn = sessionStorage.getItem("isLoggedIn");
@@ -28,7 +29,7 @@ function App() {
           path="/users-details"
           element={
             <Suspense fallback={<Loader />}>
-              <Login />
+              <Todo />
             </Suspense>
           }
         />
